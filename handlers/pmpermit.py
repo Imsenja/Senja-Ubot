@@ -3,7 +3,7 @@ import asyncio
 
 from pyrogram.methods import messages
 from helpers.pyrohelper import get_arg, denied_users
-import helpers.mongo.pmpermitdb as Zaid
+import helpers.mongo.pmpermitdb as Senja
 
 FLOOD_CTRL = 0
 ALLOWED = []
@@ -18,7 +18,7 @@ async def pmguard(client, message):
     if not arg:
         await message.edit("**Set limit to what?**")
         return
-    await Zaid.set_limit(int(arg))
+    await Senja.set_limit(int(arg))
     await message.edit(f"**Limit set to {arg}**")
 
 
@@ -29,10 +29,10 @@ async def setpmmsg(client, message):
         await message.edit("**What message to set**")
         return
     if arg == "default":
-        await Zaid.set_permit_message(Zaid.PMPERMIT_MESSAGE)
+        await Senja.set_permit_message(Senja.PMPERMIT_MESSAGE)
         await message.edit("**Anti_PM message set to default**.")
         return
-    await Zaid.set_permit_message(f"`{arg}`")
+    await Senja.set_permit_message(f"`{arg}`")
     await message.edit("**Custom anti-pm message set**")
 
 
@@ -43,18 +43,18 @@ async def setpmmsg(client, message):
         await message.edit("**What message to set**")
         return
     if arg == "default":
-        await Zaid.set_block_message(Zaid.BLOCKED)
+        await Senja.set_block_message(Senja.BLOCKED)
         await message.edit("**Block message set to default**.")
         return
-    await Zaid.set_block_message(f"`{arg}`")
+    await Senja.set_block_message(f"`{arg}`")
     await message.edit("**Custom block message set**")
 
 
 @Client.on_message(filters.command(["allow", "ap", "approve", "a"], ["."]) & filters.me & filters.private)
 async def allow(client, message):
     chat_id = message.chat.id
-    pmpermit, pm_message, limit, block_message = await Zaid.get_pm_settings()
-    await Zaid.allow_user(chat_id)
+    pmpermit, pm_message, limit, block_message = await Senja.get_pm_settings()
+    await Senja.allow_user(chat_id)
     await message.edit(f"**I have allowed [you](tg://user?id={chat_id}) to PM me.**")
     async for message in app.search_messages(
         chat_id=message.chat.id, query=pm_message, limit=1, from_user="me"
@@ -80,7 +80,7 @@ async def deny(client, message):
 )
 async def reply_pm(app: Client, message):
     global FLOOD_CTRL
-    pmpermit, pm_message, limit, block_message = await Zaid.get_pm_settings()
+    pmpermit, pm_message, limit, block_message = await Senja.get_pm_settings()
     user = message.from_user.id
     user_warns = 0 if user not in USERS_AND_WARNS else USERS_AND_WARNS[user]
     if user_warns <= limit - 2:
