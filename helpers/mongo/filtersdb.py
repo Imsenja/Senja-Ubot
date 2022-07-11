@@ -1,6 +1,6 @@
 from helpers.mongo import cli
 
-filter = cli["Zaid"]["FILTER"]
+filter = cli["Senja"]["FILTER"]
 
 
 async def add_filters(keyword, chat_id, message_id) -> None:
