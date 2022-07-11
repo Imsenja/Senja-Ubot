@@ -1,6 +1,6 @@
 from helpers.mongo import cli
 
-collection = cli["Zaid"]["gban"]
+collection = cli["Senja"]["gban"]
 
 
 async def gban_user(chat):
