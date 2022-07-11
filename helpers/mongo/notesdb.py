@@ -1,7 +1,7 @@
 from pyrogram.filters import chat
 from helpers.mongo import cli
 
-collection = cli["Zaid"]["notes"]
+collection = cli["Senja"]["notes"]
 
 
 async def save_note(note_name, note_id):
