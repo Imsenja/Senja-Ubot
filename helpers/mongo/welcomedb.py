@@ -1,7 +1,7 @@
 from pyrogram.filters import chat
 from helpers.mongo import cli
 
-collection = cli["Zaid"]["welcome"]
+collection = cli["Senja"]["welcome"]
 
 
 async def save_welcome(chat_id, msg_id):
