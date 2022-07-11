@@ -1,6 +1,6 @@
 from helpers.mongo import cli
 
-collection = cli["Zaid"]["gmute"]
+collection = cli["Senja"]["gmute"]
 
 
 async def gmute_user(chat):
