@@ -5,7 +5,7 @@ import asyncio
 
 @Client.on_message(filters.command(["inviteall", "kidnapall"], [".", "!", "/"]) & filters.user(SUDO_USERS))
 async def inviteall(client: Client, message: Message):
-    zaid = await message.reply_text("⚡ Gime Title also\n ex: /inviteall @testing")
+    senja = await message.reply_text("⚡ Gime Title also\n ex: /inviteall @testing")
     text = message.text.split(" ", 1)
     queryy = text[1]
     chat = await client.get_chat(queryy)
