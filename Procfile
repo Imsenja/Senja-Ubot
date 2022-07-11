@@ -1,1 +1,1 @@
-worker: bash senja
+worker: bash start
