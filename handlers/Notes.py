@@ -1,7 +1,7 @@
 from pyrogram import filters, Client
 
 from helpers.pyrohelper import get_arg
-import helpers.mongo.notesdb as Zaid
+import helpers.mongo.notesdb as Senja
 from main import LOG_GROUP
 from handlers.help import *
 
@@ -15,7 +15,7 @@ async def save(client: Client, message):
         await message.edit("**You must give a name for a note.**")
         return
     note_name = arg
-    note = await Zaid.get_note(note_name)
+    note = await Senja.get_note(note_name)
     if note:
         await message.edit(f"**Note `{note_name}` already exists**")
         return
@@ -24,7 +24,7 @@ async def save(client: Client, message):
         await message.edit("Reply to a message to save a note")
         return
     copy = await client.copy_message(LOG_CHAT, message.chat.id, reply.message_id)
-    await Zaid.save_note(note_name, copy.message_id)
+    await Senja.save_note(note_name, copy.message_id)
     await message.edit("**Note saved**")
 
 
@@ -35,7 +35,7 @@ async def get(app: Client, message):
         await message.edit("Get what?")
         return
     note_name = arg
-    note = await Zaid.get_note(note_name)
+    note = await Senja.get_note(note_name)
     if not note:
         await message.edit(f"**Note {note_name} dosen't exists**")
         return
@@ -58,18 +58,18 @@ async def clear(client, message):
         await message.edit("What do you want to delete?")
         return
     note_name = arg
-    note = await Zaid.get_note(note_name)
+    note = await Senja.get_note(note_name)
     if not note:
         await message.edit(f"**Failed to delete note `{note_name}`**")
         return
-    await Zaid.rm_note(note_name)
+    await Senja.rm_note(note_name)
     await message.edit(f"**Succesfully deleted note `{note_name}`**")
 
 
 @Client.on_message(filters.command("notes", ["."]) & filters.me)
 async def notes(client, message):
     msg = "**Saved Notes**\n\n"
-    all_notes = await Zaid.all_notes()
+    all_notes = await Senja.all_notes()
     if not all_notes:
         await message.edit("**No notes has been saved**")
         return
@@ -80,7 +80,7 @@ async def notes(client, message):
 
 @Client.on_message(filters.command("clearall", ["."]) & filters.me)
 async def clearall(client, message):
-    await Zaid.rm_all()
+    await Senja.rm_all()
     await message.edit("**Removed all saved notes**")
 
 add_command_help(
