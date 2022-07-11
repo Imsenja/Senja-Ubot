@@ -1,6 +1,6 @@
 from helpers.mongo import cli
 
-collection = cli["Zaid"]["rraid"]
+collection = cli["Senja"]["rraid"]
 
 
 async def rraid_user(chat):
